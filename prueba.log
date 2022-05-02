@@ -1,0 +1,4 @@
+using | identificador
+system | identificador
+: | caracter
+Error de sintaxis: Se espera un ;.
