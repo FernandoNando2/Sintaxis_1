@@ -14,9 +14,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Fernando Hernández\\Desktop\\ITQ\\4to Semestre\\Lenguajes y Autómatas 1\\Sintaxis 1\\lexico 3.csproj",
-      "projectName": "lexico 3",
-      "projectPath": "C:\\Users\\Fernando Hernández\\Desktop\\ITQ\\4to Semestre\\Lenguajes y Autómatas 1\\Sintaxis 1\\lexico 3.csproj",
+      "projectUniqueName": "C:\\Users\\Fernando Hernández\\Desktop\\ITQ\\4to Semestre\\Lenguajes y Autómatas 1\\Sintaxis 1\\lexico.csproj",
+      "projectName": "lexico",
+      "projectPath": "C:\\Users\\Fernando Hernández\\Desktop\\ITQ\\4to Semestre\\Lenguajes y Autómatas 1\\Sintaxis 1\\lexico.csproj",
       "packagesPath": "C:\\Users\\Fernando Hernández\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\Fernando Hernández\\Desktop\\ITQ\\4to Semestre\\Lenguajes y Autómatas 1\\Sintaxis 1\\obj\\",
       "projectStyle": "PackageReference",

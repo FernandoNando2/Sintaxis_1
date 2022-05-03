@@ -5,11 +5,9 @@ namespace Sintaxis_1{
 
         static void Main(string[] args){
 
-            Sintaxis a = new Sintaxis();
+            lenguaje a = new lenguaje();
 
-            a.match("using");
-            a.match(Token.tipos.identificador);
-            a.match(";");
+            a.Programa();
             /*while(!a.FinArchivo()){
                 a.NextToken();
             }*/

@@ -11,7 +11,7 @@ namespace Sintaxis_1
         int[,] trand = new int[,]
         {
             //WS,EF,EL,L, D, .,	E, +, -, =,	:, ;, &, |,	!, >, <, *,	%, /, ", ?, #, ',La
-            { 0, 0, 0, 1, 2,33, 1,21,22, 8,10,12,13,14,15,18,19,24,24,29,26,28,33,37,40}, //estado 0
+            { 0, F, 0, 1, 2,33, 1,21,22, 8,10,12,13,14,15,18,19,24,24,29,26,28,33,37,40}, //estado 0
             { F, F, F, 1, 1, F, 1, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F}, //estado 1
             { F, F, F, F, 2, 3, 5, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F}, //estado 2
             { E, E, E, E, 4, E, E, E, E, E, E, E, E, E, E, E, E, E, E, E, E, E, E, E, E}, //estado 3
@@ -59,6 +59,8 @@ namespace Sintaxis_1
             archivo = new StreamReader("C:\\Users\\Fernando Hernández\\Desktop\\ITQ\\4to Semestre\\Lenguajes y Autómatas 1\\Sintaxis 1\\prueba.cpp");
             log = new StreamWriter("C:\\Users\\Fernando Hernández\\Desktop\\ITQ\\4to Semestre\\Lenguajes y Autómatas 1\\Sintaxis 1\\prueba.log");
             log.AutoFlush = true;
+            log.WriteLine("Archivo: prueba.cpp");
+            log.WriteLine("Compilado: 03/05/22 15:31 p.m."); //Requerimiento 1
         }
         public void Cerrar()
         {
@@ -237,7 +239,7 @@ namespace Sintaxis_1
                 Console.WriteLine("Error Lexico.");
                 log.WriteLine(getContenido() + " | " +  "Error Lexico.");
             }
-            else{
+            else if(!FinArchivo()){
                 log.WriteLine(getContenido() + " | " + getClasificacion());        
             }
         }
