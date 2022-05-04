@@ -9,24 +9,55 @@ Main		->	void main()
 				numero;
 			}
 */
-namespace Sintaxis_1{
-    public class lenguaje : Sintaxis{
+namespace Sintaxis_1
+{
+    public class lenguaje : Sintaxis
+    {
 
-        //Programa	-> 	Librerias Main
-        public void Programa(){
+        //Programa	-> 	Librerias? Variables? Main
+        public void Programa()
+        {
             Librerias();
+            Variables();
             Main();
         }
 
-        //Librerias	->	#include<identificador.h>
-        private void Librerias(){
-            match("#");
-            match("include");
-            match("<");
+        //Librerias	->	#include<identificador(.h)?> Librerias?
+        private void Librerias()
+        {
+            if (getContenido() == "#")
+            {
+                match("#");
+                match("include");
+                match("<");
+                match(tipos.identificador);
+                if (getContenido() == ".")
+                {
+                    match(".");
+                    match("h");
+                }
+                match(">");
+                Librerias();
+            }
+        }
+
+        // Variables -> tipo_dato Lista_identificadores ; Variables?
+        private void Variables(){
+            if(getClasificacion() == tipos.tipo_datos){
+                match(tipos.tipo_datos);
+                Lista_identificadores();
+                match(tipos.fin_sentencia);
+                Variables();
+            }
+        }
+
+        // Lista_identificadores -> identificador (,Lista_identificadores)? 
+        private void Lista_identificadores(){
             match(tipos.identificador);
-            match(".");
-            match("h");
-            match(">");
+            if(getContenido() == ","){
+                match(",");
+                Lista_identificadores();
+            }
         }
 
         /*
@@ -35,7 +66,8 @@ namespace Sintaxis_1{
 				numero;
 			}
         */
-        private void Main(){
+        private void Main()
+        {
             match("void");
             match("main");
             match("(");
@@ -45,5 +77,6 @@ namespace Sintaxis_1{
             match(tipos.fin_sentencia);
             match("}");
         }
+        
     }
 }
