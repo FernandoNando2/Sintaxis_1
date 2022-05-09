@@ -56,11 +56,12 @@ namespace Sintaxis_1
         };
         public Lexico()
         {
+            DateTime hoy = DateTime.Now;
             archivo = new StreamReader("C:\\Users\\Fernando Hernandez\\Desktop\\ITQ\\4to Semestre\\Lenguajes y Autómatas 1\\Sintaxis 1\\prueba.cpp");
             log = new StreamWriter("C:\\Users\\Fernando Hernandez\\Desktop\\ITQ\\4to Semestre\\Lenguajes y Autómatas 1\\Sintaxis 1\\prueba.log");
             log.AutoFlush = true;
             log.WriteLine("Archivo: prueba.cpp");
-            log.WriteLine("Compilado: 03/05/22 15:31 p.m."); //Requerimiento 1
+            log.WriteLine("Compilado: " +hoy); //Requerimiento 1
         }
         public void Cerrar()
         {

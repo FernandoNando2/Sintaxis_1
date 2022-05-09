@@ -45,37 +45,144 @@ namespace Sintaxis_1
         private void Variables(){
             if(getClasificacion() == tipos.tipo_datos){
                 match(tipos.tipo_datos);
-                Lista_identificadores();
+                listaIdentificadores();
                 match(tipos.fin_sentencia);
                 Variables();
             }
         }
 
         // Lista_identificadores -> identificador (,Lista_identificadores)? 
-        private void Lista_identificadores(){
+        private void listaIdentificadores(){
             match(tipos.identificador);
             if(getContenido() == ","){
                 match(",");
-                Lista_identificadores();
+                listaIdentificadores();
             }
         }
 
-        /*
-        Main		->	void main() 
-			{
-				numero;
-			}
-        */
+        // Bloque de instrucciones -> {Lista de instrucciones?}
+        private void bloqueInstrucciones(){
+            match("{");
+            if(getContenido() != "}")
+                listaInstrucciones();
+            match("}");
+        }
+
+        //listainstrucciones -> instruccion listadeinstrucciones?
+        private void listaInstrucciones()
+        {
+            instruccion();
+            if (getContenido() != "}")
+                listaInstrucciones();
+        }
+
+        // Instruccion -> Printf | Scanf | If | While | do while | Asignacion
+        private void instruccion(){
+            if(getContenido() == "printf")
+                Printf();
+            else if (getContenido() == "scanf")
+                Scanf();
+            else if (getContenido() == "if") 
+                If();
+            else if (getContenido() == "while")
+                While();
+            else if (getContenido() == "do")
+                Do();
+            else
+                Asignacion();
+        }
+
+        // Asignacion -> identificador = cadena | numero | identificador ;
+        private void Asignacion(){
+            match(tipos.identificador);
+            match("=");
+            if(getClasificacion() == tipos.cadena)
+                match(tipos.cadena);
+            else if(getClasificacion() == tipos.numero)
+                match(tipos.numero);
+            else
+                match(tipos.identificador);
+            match(";");
+        }
+
+        // While -> while(Condicion) bloqueInstrucciones | instruccion
+        private void While(){
+            match("while");
+            match("(");
+            Condicion();
+            match(")");
+            if(getContenido() == "{")
+                bloqueInstrucciones();
+            else
+                instruccion();
+        }
+
+        //Do -> do bloqueInstrucciones | instruccion while(Condicion);
+        private void Do(){
+            match("do");
+            if(getContenido() == "{")
+                bloqueInstrucciones();
+            else
+                instruccion();
+            match("while");
+            match("(");
+            Condicion();
+            match(")");
+            match(";");
+        }
+
+        //Condicion -> numero operador_relacional numero
+        private void Condicion(){
+            match(tipos.numero);
+            match(tipos.operador_relacional);
+            match(tipos.numero);
+        }
+
+        // If -> if(Condicion) Bloque de instrucciones (Else bloqueInstrucciones)?
+        private void If(){
+            match("if");
+            match("(");
+            Condicion();
+            match(")");
+            if(getContenido() == "{")
+                bloqueInstrucciones();
+            else
+                instruccion();
+            if(getContenido() == "else"){
+                match("else");
+                if(getContenido() == "{")
+                    bloqueInstrucciones();
+                else
+                    instruccion();
+            }
+        }
+
+        // Printf -> printf(cadena);
+        private void Printf(){
+            match("printf");
+            match("(");
+            match(tipos.cadena);
+            match(")");
+            match(tipos.fin_sentencia);
+        }
+
+        // Scanf -> scanf(cadena);
+        private void Scanf(){
+            match("scanf");
+            match("(");
+            match(tipos.cadena);
+            match(")");
+            match(tipos.fin_sentencia);
+        }
+
+        // Main -> void main() Bloque de instrucciones
         private void Main()
         {
             match("void");
             match("main");
             match("(");
             match(")");
-            match("{");
-            match(tipos.numero);
-            match(tipos.fin_sentencia);
-            match("}");
+            bloqueInstrucciones();
         }
         
     }
