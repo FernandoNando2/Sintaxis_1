@@ -8,6 +8,7 @@ namespace Sintaxis_1
         protected StreamWriter log;
         const int F = -1;
         const int E = -2;
+        protected int linea;
         int[,] trand = new int[,]
         {
             //WS,EF,EL,L, D, .,	E, +, -, =,	:, ;, &, |,	!, >, <, *,	%, /, ", ?, #, ',La
@@ -56,12 +57,37 @@ namespace Sintaxis_1
         };
         public Lexico()
         {
+            linea = 1;
             DateTime hoy = DateTime.Now;
-            archivo = new StreamReader("C:\\Users\\Fernando Hernandez\\Desktop\\ITQ\\4to Semestre\\Lenguajes y Autómatas 1\\Sintaxis 1\\prueba.cpp");
             log = new StreamWriter("C:\\Users\\Fernando Hernandez\\Desktop\\ITQ\\4to Semestre\\Lenguajes y Autómatas 1\\Sintaxis 1\\prueba.log");
             log.AutoFlush = true;
             log.WriteLine("Archivo: prueba.cpp");
             log.WriteLine("Compilado: " +hoy); //Requerimiento 1
+            if(File.Exists("C:\\Users\\Fernando Hernandez\\Desktop\\ITQ\\4to Semestre\\Lenguajes y Autómatas 1\\Sintaxis 1\\prueba.cpp")) // Investigar como checar si un archivo existe
+                archivo = new StreamReader("C:\\Users\\Fernando Hernandez\\Desktop\\ITQ\\4to Semestre\\Lenguajes y Autómatas 1\\Sintaxis 1\\prueba.cpp"); 
+            else
+                throw new Error("Error: El archivo prueba.cpp no existe.", log);
+        }
+
+        public Lexico(String ruta)
+        {
+            linea = 1;
+            //log = StreamWriter(ruta.log)
+            //Usar el objeto path.
+            if(ruta == "C:\\Users\\Fernando Hernandez\\Desktop\\ITQ\\4to Semestre\\Lenguajes y Autómatas 1\\Sintaxis 1\\prueba.cpp")
+                log = new StreamWriter("C:\\Users\\Fernando Hernandez\\Desktop\\ITQ\\4to Semestre\\Lenguajes y Autómatas 1\\Sintaxis 1\\prueba.log");
+            else{
+                String nruta = Path.GetFileNameWithoutExtension(ruta);
+                log = new StreamWriter(nruta +".log");
+            }
+            DateTime hoy = DateTime.Now;
+            log.AutoFlush = true;
+            log.WriteLine("Archivo: " +ruta);
+            log.WriteLine("Compilado: " +hoy);// Requerimiento 1
+            if(File.Exists(ruta)) // Investigar como checar si un archivo existe
+                archivo = new StreamReader(ruta); 
+            else
+                throw new Error("Error: El archivo prueba.cpp no existe.", log);
         }
         public void Cerrar()
         {
@@ -80,7 +106,7 @@ namespace Sintaxis_1
                     setClasificacion(tipos.numero);
                     break;
                 case 8:
-                    setClasificacion(tipos.asignacion);
+                    setClasificacion(tipos.Asignacion);
                     break;
                 case 9:
                 case 17:
@@ -193,7 +219,6 @@ namespace Sintaxis_1
             char c;      
             int estado = 0;
 
-
             while(estado >= 0)
             {
                 c = (char)archivo.Peek(); //Funcion de transicion
@@ -202,14 +227,12 @@ namespace Sintaxis_1
                 if (estado >= 0)
                 {
                     archivo.Read();
-                    if (estado >0)
-                    {
+                    if (c == '\n')
+                        linea++;
+                    if (estado > 0)
                         buffer += c;
-                    }
                     else
-                    {
                         buffer = "";
-                    }
                 }
             }
             setContenido(buffer); 
@@ -237,12 +260,18 @@ namespace Sintaxis_1
                         break;
             }
             if(estado == E){
-                Console.WriteLine("Error Lexico.");
-                log.WriteLine(getContenido() + " | " +  "Error Lexico.");
+                // Requerimiento 9: Agregar el numero de linea en el error.
+                if(getContenido()[0] == '"')
+                    throw new Error("Error Lexico linea " +linea +": No se cerro la cadena con \".", log);
+                else if(getContenido()[0] == '\'')
+                    throw new Error("Error Lexico linea " +linea +": No se cerro el caracter con '.", log);
+                else if(getClasificacion() == tipos.numero)
+                    throw new Error("Error Lexico linea " +linea +": Se espera un numero", log);
+                else
+                    throw new Error("Error Lexico linea " +linea +": No definido.", log);
             }
-            else if(!FinArchivo()){
+            else if(!FinArchivo())
                 log.WriteLine(getContenido() + " | " + getClasificacion());        
-            }
         }
 
         public bool FinArchivo()

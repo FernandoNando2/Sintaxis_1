@@ -7,7 +7,7 @@ namespace Sintaxis_1
         private string Contenido;
         private tipos Clasificacion;
         public enum tipos{
-            identificador, numero, caracter,asignacion, inicializacion,
+            identificador, numero, caracter,Asignacion, inicializacion,
             operador_logico, operador_relacional, operador_ternario,
             operador_termino, operador_factor, incremento_termino, incremento_factor,
             fin_sentencia, cadena, tipo_datos, zona, condicion, ciclo

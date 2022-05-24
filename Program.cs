@@ -5,13 +5,18 @@ namespace Sintaxis_1{
 
         static void Main(string[] args){
 
-            lenguaje a = new lenguaje();
+            try{
+                Lenguaje a = new Lenguaje("C:\\Users\\Fernando Hernandez\\Desktop\\ITQ\\4to Semestre\\Lenguajes y Autómatas 1\\Sintaxis 1\\examen.cpp");
 
-            a.Programa();
-            /*while(!a.FinArchivo()){
-                a.NextToken();
-            }*/
-            a.Cerrar();
+                a.Programa();
+                /*while(!a.FinArchivo()){
+                    a.NextToken();
+                }*/
+                a.Cerrar();
+            }
+            catch(Exception e){
+                Console.WriteLine("Fin de compilacion.");
+            }
         }
     }
 }

@@ -1,5 +1,5 @@
-Archivo: C:\Users\Fernando Hernandez\Desktop\ITQ\4to Semestre\Lenguajes y Autómatas 1\Sintaxis 1\prueba.cpp
-Compilado: 19/05/2022 03:38:22 p. m.
+Archivo: C:\Users\Fernando Hernandez\Desktop\ITQ\4to Semestre\Lenguajes y Autómatas 1\Sintaxis 1\examen.cpp
+Compilado: 20/05/2022 02:23:20 p. m.
 # | caracter
 include | identificador
 < | operador_relacional
@@ -251,6 +251,50 @@ printf | identificador
 break | identificador
 ; | fin_sentencia
 } | caracter
+switch | condicion
+( | caracter
+a | identificador
+) | caracter
+{ | caracter
+case | identificador
+1 | numero
+: | caracter
+printf | identificador
+( | caracter
+"diga un numero: " | cadena
+) | caracter
+; | fin_sentencia
+scanf | identificador
+( | caracter
+"%f" | cadena
+) | caracter
+; | fin_sentencia
+printf | identificador
+( | caracter
+"diga un numero: " | cadena
+) | caracter
+; | fin_sentencia
+scanf | identificador
+( | caracter
+"%f" | cadena
+) | caracter
+; | fin_sentencia
+break | identificador
+; | fin_sentencia
+case | identificador
+2 | numero
+: | caracter
+printf | identificador
+( | caracter
+"dos" | cadena
+) | caracter
+; | fin_sentencia
+printf | identificador
+( | caracter
+"tres" | cadena
+) | caracter
+; | fin_sentencia
+} | caracter
 for | ciclo
 ( | caracter
 d | identificador
@@ -292,6 +336,37 @@ if | condicion
 printf | identificador
 ( | caracter
 "adios" | cadena
+) | caracter
+; | fin_sentencia
+} | caracter
+for | ciclo
+( | caracter
+d | identificador
+= | Asignacion
+0 | numero
+; | fin_sentencia
+d | identificador
+<= | operador_relacional
+c | identificador
+; | fin_sentencia
+d | identificador
+-- | incremento_termino
+) | caracter
+if | condicion
+( | caracter
+8 | numero
+== | operador_relacional
+8 | numero
+) | caracter
+{ | caracter
+printf | identificador
+( | caracter
+"hola" | cadena
+) | caracter
+; | fin_sentencia
+printf | identificador
+( | caracter
+"dos" | cadena
 ) | caracter
 ; | fin_sentencia
 } | caracter
